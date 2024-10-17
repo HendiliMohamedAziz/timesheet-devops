@@ -4,15 +4,7 @@ package tn.esprit.spring.entities;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "T_USER")
@@ -34,22 +26,34 @@ public class User implements Serializable {
 	private Date dateNaissance;
 	
 	@Enumerated(EnumType.STRING)
-	Role role; 
+	Role role;
+
+	@ManyToOne
+	@JoinColumn(name = "entreprise_id")
+	private Entreprise entreprise;
 	
 	public User() {	}
 
-	public User(String firstName, String lastName, Date dateNaissance, Role role) {
+	public User(String firstName, String lastName, Date dateNaissance, Role role, Entreprise entreprise) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateNaissance = dateNaissance;
 		this.role = role;
+		this.entreprise = entreprise;
 	}
 
 
 	public User(Long id, String firstName, String lastName, Date dateNaissance, Role role) {
 		super();
 		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateNaissance = dateNaissance;
+		this.role = role;
+	}
+
+	public User(String firstName, String lastName, Date dateNaissance, Role role) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateNaissance = dateNaissance;
@@ -89,6 +93,20 @@ public class User implements Serializable {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public Entreprise getEntreprise() {
+		return entreprise;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setEntreprise(Entreprise entreprise) {
+		this.entreprise = entreprise;
+	}
 }

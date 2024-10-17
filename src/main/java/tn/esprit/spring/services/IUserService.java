@@ -2,6 +2,7 @@ package tn.esprit.spring.services;
 
 import java.util.List;
 
+import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.entities.User;
 
 public interface IUserService { 
@@ -11,6 +12,8 @@ public interface IUserService {
 	void deleteUser(String id);
 	User updateUser(User u);
 	User retrieveUser(String id);
-
+	boolean isUserAdult(User user);
+	User findUserById(Long id);
+	User addUserToEntreprise(User user, Entreprise entreprise);
 } 
  

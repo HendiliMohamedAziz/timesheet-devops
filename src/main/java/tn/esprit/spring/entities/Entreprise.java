@@ -30,6 +30,11 @@ public class Entreprise implements Serializable{
 			fetch=FetchType.EAGER)
 	private List<Departement> departements = new ArrayList<>();
 
+	@OneToMany(mappedBy="entreprise",
+			cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+			fetch=FetchType.EAGER)
+	private List<User> users = new ArrayList<>();
+
 	public Entreprise() {
 		super();
 	}
@@ -38,7 +43,11 @@ public class Entreprise implements Serializable{
 		this.name = name;
 		this.raisonSocial = raisonSocial;
 	}
- 
+
+	public Entreprise(String name) {
+		this.name = name;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -70,5 +79,12 @@ public class Entreprise implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
 }
