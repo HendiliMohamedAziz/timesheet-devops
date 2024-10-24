@@ -32,7 +32,7 @@ public class Entreprise implements Serializable{
 
 	@OneToMany(mappedBy="entreprise",
 			cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-			fetch=FetchType.EAGER)
+			fetch=FetchType.LAZY)
 	private List<User> users = new ArrayList<>();
 
 	public Entreprise() {
