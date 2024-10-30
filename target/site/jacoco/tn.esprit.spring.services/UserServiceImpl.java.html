@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">timesheet-devops</a> &gt; <a href="index.source.html" class="el_package">tn.esprit.spring.services</a> &gt; <span class="el_source">UserServiceImpl.java</span></div><h1>UserServiceImpl.java</h1><pre class="source lang-java linenums">package tn.esprit.spring.services;
+
+import java.util.Date;
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import tn.esprit.spring.entities.Entreprise;
+import tn.esprit.spring.entities.User;
+import tn.esprit.spring.repository.UserRepository;
+
+@Service
+<span class="fc" id="L16">public class UserServiceImpl implements IUserService {</span>
+
+	@Autowired
+	UserRepository userRepository;
+
+
+
+<span class="fc" id="L23">	private static final Logger l = LogManager.getLogger(UserServiceImpl.class);</span>
+
+	@Override
+	public List&lt;User&gt; retrieveAllUsers() { 
+
+<span class="nc" id="L28">		return null;</span>
+	}
+
+
+	@Override
+	public User addUser(User u) {
+
+<span class="nc" id="L35">		User utilisateur = null; </span>
+
+		try {
+			// TODO Log à ajouter en début de la méthode 
+<span class="nc" id="L39">			utilisateur = userRepository.save(u); </span>
+			// TODO Log à ajouter à la fin de la méthode 
+
+<span class="nc" id="L42">		} catch (Exception e) {</span>
+			// TODO log ici : l....(&quot;error in addUser() : &quot; + e);
+<span class="nc" id="L44">		}</span>
+
+<span class="nc" id="L46">		return utilisateur; </span>
+	}
+
+	@Override 
+	public User updateUser(User u) {
+
+<span class="nc" id="L52">		User userUpdated = null; </span>
+<span class="nc" id="L53">		User u_saved = null; </span>
+
+		
+		try {
+			// TODO Log à ajouter en début de la méthode 
+<span class="nc" id="L58">			userUpdated = userRepository.save(u); </span>
+			// TODO Log à ajouter à la fin de la méthode 
+
+<span class="nc" id="L61">		} catch (Exception e) {</span>
+			// TODO log ici : l....(&quot;error in updateUser() : &quot; + e);
+<span class="nc" id="L63">		}</span>
+
+<span class="nc" id="L65">		return userUpdated; </span>
+	}
+
+	@Override
+	public void deleteUser(String id) {
+
+		try {
+			// TODO Log à ajouter en début de la méthode 
+<span class="nc" id="L73">			userRepository.deleteById(Long.parseLong(id)); </span>
+			// TODO Log à ajouter à la fin de la méthode 
+
+<span class="nc" id="L76">		} catch (Exception e) {</span>
+			// TODO log ici : l....(&quot;error in deleteUser() : &quot; + e);
+<span class="nc" id="L78">		}</span>
+
+<span class="nc" id="L80">	}</span>
+
+	@Override
+	public User retrieveUser(String id) {
+<span class="nc" id="L84">		User u = null;</span>
+		try {
+<span class="nc" id="L86">			u =  userRepository.findById(Long.parseLong(id)).get();</span>
+
+<span class="nc" id="L88">		} catch (Exception e) {</span>
+<span class="nc" id="L89">		}</span>
+
+<span class="nc" id="L91">		return u;</span>
+	}
+
+	@Override
+	public boolean isUserAdult(User user) {
+<span class="fc" id="L96">		return user.getDateNaissance().before(new Date(System.currentTimeMillis() - 18L * 365 * 24 * 60 * 60 * 1000));</span>
+	}
+
+	@Override
+	public User findUserById(Long id) {
+<span class="nc" id="L101">		return userRepository.findUserById(id);</span>
+	}
+
+	@Override
+	public User addUserToEntreprise(User user, Entreprise entreprise) {
+<span class="fc" id="L106">		user.setEntreprise(entreprise);</span>
+<span class="fc" id="L107">		return user;</span>
+	}
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
